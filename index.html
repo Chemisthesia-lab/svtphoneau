@@ -1,0 +1,2712 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1a1c26">
+  <title>SVT PHONE AU | Tragedi Puding & Black Card (Comedy Interactive)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ========================================================
+   SEVENTEEN PHONE SIMULATOR - INTERACTIVE COMEDY AU
+   Rose Quartz (#F7CAC9) & Serenity (#92A8D1) Palette
+   Authentic iOS 17/18 Interface Simulator
+   ======================================================== */
+    :root {
+      --rq: #F7CAC9;
+      --rq-dark: #e8a5a4;
+      --sr: #92A8D1;
+      --sr-dark: #6482ba;
+      --wp: linear-gradient(155deg, #1f2742 0%, #3e4868 40%, #c49ba6 75%, #f7cac9 100%);
+      --bl: #007aff;
+      --grn: #34c759;
+      --rd: #ff3b30;
+      --gold: #ffb703;
+      --text-main: #000;
+      --bubble-me: #007aff;
+      --bubble-them: #e9e9eb;
+      --bubble-them-dark: #26252a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 30%, #1c2235 0%, #090c13 100%);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      user-select: none;
+      overflow: hidden;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Outer desktop wrapper with phone frame */
+    #device-frame {
+      position: relative;
+      width: 393px;
+      height: 852px;
+      max-height: 96vh;
+      aspect-ratio: 393/852;
+    }
+
+    #phone {
+      position: absolute;
+      inset: 0;
+      border-radius: 54px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 0 0 10px #1e222d, 0 0 0 13px #3d4455, 0 35px 80px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Fullscreen on small screens */
+    @media (max-width: 480px),
+    (max-height: 860px) {
+      #device-frame {
+        width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+      }
+
+      #phone {
+        border-radius: 0;
+        box-shadow: none;
+      }
+    }
+
+    .scr {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wp {
+      background: var(--wp);
+    }
+
+    /* Status Bar */
+    #sb {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 52px;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 32px 0 38px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      pointer-events: none;
+    }
+
+    #phone[data-ui="light"] #sb {
+      color: #000;
+    }
+
+    #sb .r {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .sig {
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+      height: 11px;
+    }
+
+    .sig i {
+      width: 3px;
+      background: currentColor;
+      border-radius: 1px;
+    }
+
+    .sig i:nth-child(1) {
+      height: 3px;
+    }
+
+    .sig i:nth-child(2) {
+      height: 5px;
+    }
+
+    .sig i:nth-child(3) {
+      height: 8px;
+    }
+
+    .sig i:nth-child(4) {
+      height: 11px;
+    }
+
+    .bat {
+      position: relative;
+      width: 26px;
+      height: 12px;
+      border: 1px solid currentColor;
+      border-radius: 3.5px;
+      padding: 1px;
+      display: flex;
+      align-items: center;
+    }
+
+    .bat::after {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: 3px;
+      width: 2px;
+      height: 4px;
+      background: currentColor;
+      border-radius: 0 1px 1px 0;
+    }
+
+    .bat i {
+      height: 100%;
+      width: 82%;
+      background: currentColor;
+      border-radius: 1.5px;
+    }
+
+    /* Dynamic Island */
+    #isl {
+      position: absolute;
+      top: 11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 122px;
+      height: 35px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 120;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    #isl.expand {
+      width: 360px;
+      height: 72px;
+      border-radius: 36px;
+      padding: 12px 18px;
+    }
+
+    .isl-left,
+    .isl-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #fff;
+      font-size: 13px;
+    }
+
+    .isl-lens {
+      width: 11px;
+      height: 11px;
+      background: #111;
+      border-radius: 50%;
+      border: 1px solid #222;
+    }
+
+    /* Home Bar / Indicator */
+    #bar {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 138px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 3px;
+      z-index: 150;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    #phone[data-ui="light"] #bar {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    /* Lock Screen */
+    #lock {
+      z-index: 60;
+      padding: 70px 24px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #fff;
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s;
+    }
+
+    #lock.up {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #lock.gone {
+      display: none;
+    }
+
+    .lock-clock {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    #ld {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    #lt {
+      font-size: 82px;
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin: 6px 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .lock-svt-badge {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    /* Lock notifications stack */
+    #lock-notifs {
+      width: 100%;
+      margin-top: 35px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+
+    .nf {
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 20px;
+      padding: 12px 16px;
+      color: #1c1c1e;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      display: flex;
+      gap: 12px;
+      cursor: pointer;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: notifIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    @keyframes notifIn {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .nf-av {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      color: #fff;
+    }
+
+    .nf-bd {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .nf-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .nf-top small {
+      font-size: 11px;
+      font-weight: 500;
+      color: #666;
+    }
+
+    .nf-txt {
+      font-size: 13px;
+      line-height: 1.35;
+      color: #222;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .qb-bar {
+      position: absolute;
+      bottom: 46px;
+      left: 0;
+      right: 0;
+      padding: 0 46px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .qb {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(15px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    #lhint {
+      position: absolute;
+      bottom: 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+      animation: pulseHint 2s infinite ease-in-out;
+      cursor: pointer;
+    }
+
+    @keyframes pulseHint {
+
+      0%,
+      100% {
+        opacity: 0.5;
+        transform: translateY(0);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateY(-3px);
+      }
+    }
+
+    /* Passcode Screen */
+    #pass {
+      z-index: 55;
+      background: rgba(18, 22, 34, 0.95);
+      backdrop-filter: blur(35px);
+      -webkit-backdrop-filter: blur(35px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 100px;
+      color: #fff;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    #pass.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #pass h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    #phint {
+      font-size: 13px;
+      color: #ffb703;
+      text-align: center;
+      max-width: 290px;
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+    #pdots {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    #pdots i {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 1.5px solid #fff;
+      transition: background 0.15s;
+    }
+
+    #pdots i.f {
+      background: #fff;
+    }
+
+    #pdots.shake {
+      animation: shakeDots 0.4s;
+    }
+
+    @keyframes shakeDots {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      20%,
+      60% {
+        transform: translateX(-12px);
+      }
+
+      40%,
+      80% {
+        transform: translateX(12px);
+      }
+    }
+
+    #pad {
+      display: grid;
+      grid-template-columns: repeat(3, 76px);
+      gap: 22px 28px;
+    }
+
+    #pad b {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+
+    #pad b:active {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    #pad b small {
+      font-size: 9px;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-top: -2px;
+    }
+
+    #pad b.e {
+      background: transparent;
+      pointer-events: none;
+    }
+
+    #pbot {
+      width: 260px;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 36px;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+      cursor: pointer;
+    }
+
+    /* Intro Modal */
+    #intro {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
+      z-index: 140;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: #fff;
+      transition: opacity 0.3s;
+    }
+
+    #intro.go {
+      display: none;
+    }
+
+    .intro-box {
+      background: #1e2434;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 28px;
+      padding: 28px 24px;
+      text-align: center;
+      max-width: 320px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .intro-box h1 {
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--rq) 0%, var(--sr) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .intro-box .sub {
+      font-size: 13px;
+      color: #a0aec0;
+      margin-bottom: 18px;
+    }
+
+    .intro-box p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      margin-bottom: 14px;
+    }
+
+    .intro-box .btn-ok {
+      background: linear-gradient(135deg, var(--sr-dark) 0%, var(--rq-dark) 100%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 12px 0;
+      width: 100%;
+      border-radius: 14px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* Home Screen */
+    #home {
+      z-index: 10;
+      padding: 68px 20px 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .widgets-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .widget-card {
+      flex: 1;
+      height: 148px;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px 14px;
+      padding: 0 4px;
+    }
+
+    .app-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .app-icon-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+      transition: transform 0.15s;
+      color: #fff;
+    }
+
+    .app-icon:active .app-icon-img {
+      transform: scale(0.92);
+    }
+
+    .app-icon span {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .badge-count {
+      position: absolute;
+      top: -4px;
+      right: 6px;
+      background: #ff3b30;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Dock */
+    .dock-bar {
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border-radius: 35px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Generic App Window */
+    .app-window {
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      z-index: 40;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.92);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+    }
+
+    .app-window.open {
+      transform: scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Messages App */
+    #app-messages {
+      background: #f7f7f8;
+    }
+
+    /* Top-left Quick Home Navigation Button */
+    #quick-home-btn {
+      position: absolute;
+      top: 13px;
+      left: 14px;
+      z-index: 115;
+      display: none;
+      align-items: center;
+      gap: 3px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 3px 10px 3px 6px;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+      border: 0.5px solid rgba(0, 0, 0, 0.12);
+      color: var(--bl);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.2s;
+      pointer-events: auto;
+    }
+
+    #phone.in-app #quick-home-btn {
+      display: inline-flex;
+    }
+
+    #quick-home-btn:hover {
+      background: #fff;
+    }
+
+    #quick-home-btn:active {
+      transform: scale(0.93);
+      opacity: 0.8;
+    }
+
+    #quick-home-btn .home-arrow {
+      font-size: 18px;
+      line-height: 1;
+      margin-top: -2px;
+    }
+
+    /* In-App Header Nav Button */
+    .nav-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+      color: var(--bl);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 8px 4px 2px;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .nav-home-btn:hover {
+      background: rgba(0, 122, 255, 0.08);
+    }
+
+    .nav-home-btn:active {
+      opacity: 0.6;
+      transform: scale(0.96);
+    }
+
+    .nav-home-btn .arrow {
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 1;
+      margin-top: -2px;
+    }
+
+    .msg-header {
+      height: 94px;
+      padding: 44px 16px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 0.5px solid #d1d1d6;
+      flex-shrink: 0;
+    }
+
+    .msg-header-back {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--bl);
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .msg-header-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .msg-header-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .msg-header-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: #111;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    /* Message Thread / Bubbles */
+    .chat-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .chat-ts {
+      align-self: center;
+      font-size: 11px;
+      font-weight: 500;
+      color: #8e8e93;
+      margin: 8px 0 4px;
+    }
+
+    .b-wrap {
+      display: flex;
+      flex-direction: column;
+      max-width: 78%;
+    }
+
+    .b-wrap.them {
+      align-self: flex-start;
+    }
+
+    .b-wrap.me {
+      align-self: flex-end;
+    }
+
+    .sender-tag {
+      font-size: 11px;
+      font-weight: 700;
+      margin: 0 0 2px 10px;
+    }
+
+    .bubble {
+      padding: 9px 14px;
+      border-radius: 18px;
+      font-size: 15px;
+      line-height: 1.38;
+      word-break: break-word;
+      position: relative;
+    }
+
+    .bubble.them {
+      background: var(--bubble-them);
+      color: #000;
+      border-bottom-left-radius: 4px;
+    }
+
+    .bubble.me {
+      background: var(--bubble-me);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bubble.img-bubble {
+      padding: 4px;
+      background: transparent;
+    }
+
+    .bubble.img-bubble img,
+    .bubble.img-bubble .photo-card {
+      width: 220px;
+      border-radius: 16px;
+      display: block;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+    }
+
+    .photo-card {
+      background: #1e2230;
+      padding: 12px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .bubble-caption {
+      font-size: 12px;
+      margin-top: 6px;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .bubble-delivered {
+      font-size: 11px;
+      color: #8e8e93;
+      align-self: flex-end;
+      margin-top: 2px;
+      margin-right: 4px;
+    }
+
+    /* Typing Indicator */
+    .typing-dots {
+      display: flex;
+      gap: 4px;
+      padding: 10px 14px;
+      background: var(--bubble-them);
+      border-radius: 18px;
+      border-bottom-left-radius: 4px;
+      width: fit-content;
+    }
+
+    .typing-dots span {
+      width: 6px;
+      height: 6px;
+      background: #8e8e93;
+      border-radius: 50%;
+      animation: typingBounce 1.2s infinite ease-in-out;
+    }
+
+    .typing-dots span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dots span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typingBounce {
+
+      0%,
+      80%,
+      100% {
+        transform: scale(0.6);
+        opacity: 0.5;
+      }
+
+      40% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+    }
+
+    /* Input Bar & Keyboard */
+    .chat-input-bar {
+      padding: 8px 12px 14px;
+      background: #fff;
+      border-top: 0.5px solid #d1d1d6;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-input-field {
+      flex: 1;
+      min-height: 36px;
+      background: #f2f2f7;
+      border: 1px solid #e5e5ea;
+      border-radius: 19px;
+      padding: 8px 14px;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      color: #000;
+      outline: none;
+    }
+
+    .chat-send-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bl);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .chat-send-btn:active {
+      transform: scale(0.9);
+    }
+
+    /* Simulated Virtual iOS Keyboard */
+    #virtual-keyboard {
+      background: #d1d3d9;
+      padding: 6px 4px 28px;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    #virtual-keyboard.up {
+      display: flex;
+    }
+
+    .kb-row {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .kb-key {
+      height: 42px;
+      flex: 1;
+      max-width: 34px;
+      background: #fff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      font-weight: 400;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+    }
+
+    .kb-key.pressed {
+      background: #b8bbc4;
+    }
+
+    .kb-key.special {
+      flex: 1.5;
+      background: #abb0bc;
+      font-size: 14px;
+    }
+
+    .kb-key.space {
+      flex: 5;
+      max-width: 190px;
+    }
+
+    /* Threads List (Messages Home) */
+    .threads-list {
+      flex: 1;
+      overflow-y: auto;
+      background: #fff;
+    }
+
+    .thread-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 0.5px solid #e5e5ea;
+      cursor: pointer;
+    }
+
+    .thread-av {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .thread-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .thread-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2px;
+    }
+
+    .thread-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+    }
+
+    .thread-time {
+      font-size: 13px;
+      color: #8e8e93;
+    }
+
+    .thread-preview {
+      font-size: 14px;
+      color: #666;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Call Overlay Screen */
+    #call-screen {
+      position: absolute;
+      inset: 0;
+      z-index: 130;
+      background: linear-gradient(180deg, #1f2742 0%, #0d111a 100%);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 90px 24px 60px;
+      color: #fff;
+    }
+
+    #call-screen.active {
+      display: flex;
+    }
+
+    .call-av {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .call-name {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .call-status {
+      font-size: 16px;
+      color: #a0aec0;
+      margin-bottom: 24px;
+    }
+
+    .call-dialogue-box {
+      width: 100%;
+      max-width: 320px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 16px;
+      margin-bottom: auto;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 15px;
+      line-height: 1.4;
+      color: #e2e8f0;
+    }
+
+    .call-actions-row {
+      width: 100%;
+      max-width: 280px;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 30px;
+    }
+
+    .call-btn {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .call-btn.decline {
+      background: var(--rd);
+    }
+
+    .call-btn.accept {
+      background: var(--grn);
+    }
+
+    /* Banner Notification from Top */
+    #banner-notif {
+      position: absolute;
+      top: 14px;
+      left: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border-radius: 24px;
+      padding: 12px 16px;
+      z-index: 135;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+      transform: translateY(-130%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    #banner-notif.show {
+      transform: translateY(0);
+    }
+
+    /* Lightbox Modal */
+    #img-modal {
+      position: absolute;
+      inset: 0;
+      z-index: 160;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      flex-direction: column;
+      padding: 60px 18px 24px;
+    }
+
+    #img-modal.open {
+      display: flex;
+    }
+
+    .modal-close {
+      color: #0a84ff;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .modal-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+
+    /* Notes App */
+    #app-notes {
+      background: #f2f2f7;
+    }
+
+    .notes-list {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow-y: auto;
+    }
+
+    .note-item {
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+    }
+
+    .note-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .note-snippet {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.35;
+    }
+
+    /* Photos App */
+    #app-photos {
+      background: #fff;
+    }
+
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      padding: 4px;
+      overflow-y: auto;
+    }
+
+    .photo-thumb {
+      aspect-ratio: 1;
+      background: #e2e8f0;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-thumb span {
+      position: absolute;
+      bottom: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* Instagram App */
+    #app-insta {
+      background: #fff;
+    }
+
+    .ig-header {
+      height: 88px;
+      padding: 44px 16px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 0.5px solid #eee;
+      font-weight: 800;
+      font-size: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .ig-feed {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .ig-post {
+      padding-bottom: 18px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .ig-post-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .ig-post-head .ig-av {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .ig-post-media {
+      height: 280px;
+      background: #f7fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      font-size: 40px;
+    }
+
+    .ig-post-media p {
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 10px;
+      color: #333;
+    }
+
+    .ig-post-bar {
+      display: flex;
+      gap: 16px;
+      padding: 10px 14px 4px;
+      font-size: 22px;
+    }
+
+    .ig-post-likes {
+      font-size: 13px;
+      font-weight: 700;
+      padding: 0 14px;
+    }
+
+    .ig-post-caption {
+      font-size: 13px;
+      padding: 4px 14px;
+      line-height: 1.35;
+    }
+
+    /* Safari / Checkpoint App */
+    #app-safari {
+      background: #f8f9fa;
+    }
+
+    .checkpoint-list {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cp-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      border: 1px solid #e2e8f0;
+    }
+
+    .cp-num {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--sr);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="device-frame">
+    <div id="phone" data-ui="dark">
+      <!-- Status Bar -->
+      <div id="sb">
+        <span id="clk">10:10</span>
+        <div class="r">
+          <div class="sig"><i></i><i></i><i></i><i></i></div>
+          <span>5G</span>
+          <div class="bat"><i></i></div>
+        </div>
+      </div>
+
+      <!-- Dynamic Island -->
+      <div id="isl">
+        <div class="isl-left">
+          <span class="isl-lens"></span>
+          <span id="isl-text" style="font-size:11px;font-weight:600;opacity:0;">SVT</span>
+        </div>
+        <div class="isl-right">
+          <span id="isl-icon">💎</span>
+        </div>
+      </div>
+
+      <!-- Home Indicator Bar -->
+      <div id="bar" onclick="goHome()"></div>
+
+      <!-- Navigasi Kembali (Home) di pojok kiri atas saat membuka aplikasi -->
+      <div id="quick-home-btn" onclick="goHome()" title="Kembali ke Beranda (Home)">
+        <span class="home-arrow">‹</span>
+        <span class="home-text">Home</span>
+      </div>
+
+      <!-- Drop-down Top Notification Banner -->
+      <div id="banner-notif" onclick="openFromBanner()">
+        <div class="nf-av" id="banner-av" style="background:#E63946;">🍒</div>
+        <div class="nf-bd">
+          <div class="nf-top">
+            <span id="banner-name">S.Coups</span>
+            <small>Sekarang</small>
+          </div>
+          <div class="nf-txt" id="banner-text">PERHATIAN SEMUA!! KUMPUL SEKARANG!</div>
+        </div>
+      </div>
+
+      <!-- ==================== 1. LOCKSCREEN ==================== -->
+      <div class="scr wp" id="lock">
+        <div class="lock-clock">
+          <div id="ld">Selasa, 27 Oktober</div>
+          <div id="lt">10:10</div>
+          <div class="lock-svt-badge">
+            <span>💎</span> SEVENTEEN DORM OS
+          </div>
+        </div>
+
+        <!-- Notification Stack on Lockscreen -->
+        <div id="lock-notifs">
+          <div class="nf" onclick="showPass()">
+            <div class="nf-av" style="background:#2A9D8F;">☀️</div>
+            <div class="nf-bd">
+              <div class="nf-top">
+                <span>Dokyeom (DK)</span>
+                <small>Baru saja</small>
+              </div>
+              <div class="nf-txt">SIAPA YANG MAKAN PUDING COKLAT GUEEE?! 😭😭</div>
+            </div>
+          </div>
+          <div class="nf" onclick="showPass()">
+            <div class="nf-av" style="background:#E63946;">🍒</div>
+            <div class="nf-bd">
+              <div class="nf-top">
+                <span>Bapak S.Coups</span>
+                <small>2m lalu</small>
+              </div>
+              <div class="nf-txt">BLACK CARD GUE DI MANA WOY?! KARTU KREDIT ILANG!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick action buttons -->
+        <div class="qb-bar">
+          <div class="qb" onclick="sfx('keytap')">🔦</div>
+          <div class="qb" onclick="showPass()">📸</div>
+        </div>
+
+        <div id="lhint" onclick="showPass()">Geser ke atas atau klik untuk buka</div>
+      </div>
+
+      <!-- ==================== 2. PASSCODE SCREEN ==================== -->
+      <div class="scr" id="pass">
+        <h3>Masukkan Sandi</h3>
+        <p id="phint">Hint: Jam keramat Hoshi (1010) atau angka keramat Seventeen (1717)!</p>
+        <div id="pdots">
+          <i></i><i></i><i></i><i></i>
+        </div>
+        <div id="pad"></div>
+        <div id="pbot">
+          <span>Darurat</span>
+          <span onclick="cancelPass()">Batal</span>
+        </div>
+
+        <!-- Intro Popup Modal -->
+        <div id="intro">
+          <div class="intro-box">
+            <h1>SVT PHONE AU</h1>
+            <div class="sub">Tragedi Puding & Black Card (Comedy Interactive)</div>
+            <p>Selamat datang di ponsel asrama SEVENTEEN! Temukan kisah rusuh hilangnya puding Dokyeom dan black card
+              bapak S.Coups lewat pesan chat, telepon suara, dan memo asrama.</p>
+            <div class="btn-ok" onclick="dismissIntro()">Mulai Membaca</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 3. HOMESCREEN ==================== -->
+      <div class="scr wp" id="home">
+        <!-- Top Widgets -->
+        <div class="widgets-row">
+          <!-- Weather Widget -->
+          <div class="widget-card">
+            <div style="font-size:13px;font-weight:700;color:#1e293b;">
+              📍 Asrama SVT
+            </div>
+            <div>
+              <div style="font-size:34px;font-weight:800;color:#0f172a;">24°</div>
+              <div style="font-size:12px;font-weight:600;color:#475569;">Cerah Berawan ☀️</div>
+            </div>
+            <div style="font-size:11px;color:#64748b;">H: 26° L: 19°</div>
+          </div>
+
+          <!-- Schedule Widget -->
+          <div class="widget-card">
+            <div style="font-size:13px;font-weight:700;color:#e11d48;">
+              📅 JADWAL HARI INI
+            </div>
+            <div>
+              <div style="font-size:16px;font-weight:800;color:#0f172a;">Going SVT</div>
+              <div style="font-size:12px;color:#475569;">Jam 21:00 KST</div>
+            </div>
+            <div style="font-size:11px;color:#64748b;">Piket cuci piring: Dino</div>
+          </div>
+        </div>
+
+        <!-- App Grid -->
+        <div class="app-grid">
+          <div class="app-icon" onclick="openApp('notes')">
+            <div class="app-icon-img" style="background:#ffcc00;">📝</div>
+            <span>Notes</span>
+          </div>
+          <div class="app-icon" onclick="openApp('photos')">
+            <div class="app-icon-img" style="background:#fff;border:1px solid #ddd;">🌸</div>
+            <span>Photos</span>
+          </div>
+          <div class="app-icon" onclick="openApp('insta')">
+            <div class="app-icon-img"
+              style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">📸</div>
+            <span>Instagram</span>
+          </div>
+          <div class="app-icon" onclick="openApp('safari')">
+            <div class="app-icon-img" style="background:#007aff;">🧭</div>
+            <span>Checkpoint</span>
+          </div>
+        </div>
+
+        <!-- Bottom Dock -->
+        <div class="dock-bar">
+          <div class="app-icon" onclick="openApp('phone')">
+            <div class="app-icon-img" style="background:#34c759;">📞</div>
+          </div>
+          <div class="app-icon" onclick="openApp('messages')">
+            <div class="app-icon-img" style="background:#34c759;">💬</div>
+            <div class="badge-count" id="dock-badge">3</div>
+          </div>
+          <div class="app-icon" onclick="openApp('notes')">
+            <div class="app-icon-img" style="background:#ff9500;">📒</div>
+          </div>
+          <div class="app-icon" onclick="openApp('insta')">
+            <div class="app-icon-img" style="background:#5856d6;">💎</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 4. MESSAGES APP ==================== -->
+      <div class="app-window" id="app-messages">
+        <!-- View A: Threads List -->
+        <div id="msg-threads-view" style="display:flex;flex-direction:column;height:100%;">
+          <div class="msg-header">
+            <div class="nav-home-btn" onclick="goHome()">
+              <span class="arrow">‹</span>
+              <span>Home</span>
+            </div>
+            <div style="font-size:18px;font-weight:800;color:#000;">Pesan</div>
+            <div style="font-size:20px;color:var(--bl);cursor:pointer;" onclick="sfx('keytap')">✏️</div>
+          </div>
+          <div class="threads-list" id="threads-container"></div>
+        </div>
+
+        <!-- View B: Active Chat Room -->
+        <div id="msg-chat-view" style="display:none;flex-direction:column;height:100%;">
+          <div class="msg-header">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <div class="nav-home-btn" onclick="goHome()" title="Kembali ke Home" style="padding:4px 6px;">
+                <span style="font-size:16px;">🏠</span>
+              </div>
+              <div class="msg-header-back" onclick="backToThreads()">
+                <span>‹</span> Pesan
+              </div>
+            </div>
+            <div class="msg-header-center" onclick="showMemberProfile()">
+              <div class="msg-header-avatar" id="chat-head-av" style="background:#E63946;">🍒</div>
+              <div class="msg-header-name" id="chat-head-name">ASRAMA SEVENTEEN (13) ›</div>
+            </div>
+            <div style="font-size:20px;color:var(--bl);cursor:pointer;" onclick="triggerDirectCall()">📞</div>
+          </div>
+
+          <!-- Chat messages container -->
+          <div class="chat-scroll" id="chat-scroll"></div>
+
+          <!-- Input Bar -->
+          <div class="chat-input-bar">
+            <div style="font-size:20px;color:#8e8e93;cursor:pointer;" onclick="sfx('keytap')">📷</div>
+            <div class="chat-input-field" id="chat-input" onclick="toggleKeyboard(true)">
+              <span id="input-placeholder" style="color:#8e8e93;">iMessage</span>
+            </div>
+            <div class="chat-send-btn" id="btn-send" onclick="sendCurrentMessage()">↑</div>
+          </div>
+
+          <!-- Virtual iOS Keyboard -->
+          <div id="virtual-keyboard">
+            <div class="kb-row">
+              <div class="kb-key" data-k="q">q</div>
+              <div class="kb-key" data-k="w">w</div>
+              <div class="kb-key" data-k="e">e</div>
+              <div class="kb-key" data-k="r">r</div>
+              <div class="kb-key" data-k="t">t</div>
+              <div class="kb-key" data-k="y">y</div>
+              <div class="kb-key" data-k="u">u</div>
+              <div class="kb-key" data-k="i">i</div>
+              <div class="kb-key" data-k="o">o</div>
+              <div class="kb-key" data-k="p">p</div>
+            </div>
+            <div class="kb-row">
+              <div class="kb-key" data-k="a">a</div>
+              <div class="kb-key" data-k="s">s</div>
+              <div class="kb-key" data-k="d">d</div>
+              <div class="kb-key" data-k="f">f</div>
+              <div class="kb-key" data-k="g">g</div>
+              <div class="kb-key" data-k="h">h</div>
+              <div class="kb-key" data-k="j">j</div>
+              <div class="kb-key" data-k="k">k</div>
+              <div class="kb-key" data-k="l">l</div>
+            </div>
+            <div class="kb-row">
+              <div class="kb-key special">⇧</div>
+              <div class="kb-key" data-k="z">z</div>
+              <div class="kb-key" data-k="x">x</div>
+              <div class="kb-key" data-k="c">c</div>
+              <div class="kb-key" data-k="v">v</div>
+              <div class="kb-key" data-k="b">b</div>
+              <div class="kb-key" data-k="n">n</div>
+              <div class="kb-key" data-k="m">m</div>
+              <div class="kb-key special" onclick="deleteChar()">⌫</div>
+            </div>
+            <div class="kb-row">
+              <div class="kb-key special">123</div>
+              <div class="kb-key space" data-k=" ">spasi</div>
+              <div class="kb-key special" onclick="sendCurrentMessage()" style="color:var(--bl);font-weight:700;">kirim
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== 5. PHONE CALL SCREEN ==================== -->
+      <div id="call-screen">
+        <div class="call-av" id="call-av" style="background:#E63946;">🍒</div>
+        <div class="call-name" id="call-name">Bapak S.Coups</div>
+        <div class="call-status" id="call-status">Panggilan Masuk...</div>
+
+        <div class="call-dialogue-box" id="call-box" style="display:none;">
+          <span id="call-line-text">"Halo?! Kamu di asrama kan?! Tolong periksa kamar Hoshi sekarang juga!!"</span>
+        </div>
+
+        <div class="call-actions-row">
+          <div class="call-btn decline" onclick="declineCall()">✕</div>
+          <div class="call-btn accept" id="call-accept-btn" onclick="acceptCall()">📞</div>
+        </div>
+      </div>
+
+      <!-- ==================== 6. NOTES APP ==================== -->
+      <div class="app-window" id="app-notes">
+        <div class="msg-header">
+          <div class="nav-home-btn" onclick="goHome()">
+            <span class="arrow">‹</span>
+            <span>Home</span>
+          </div>
+          <div style="font-size:18px;font-weight:800;color:#000;">Notes Asrama</div>
+          <div style="color:var(--bl);font-weight:600;cursor:pointer;font-size:15px;" onclick="goHome()">Selesai</div>
+        </div>
+        <div class="notes-list" id="notes-container"></div>
+      </div>
+
+      <!-- ==================== 7. PHOTOS APP ==================== -->
+      <div class="app-window" id="app-photos">
+        <div class="msg-header">
+          <div class="nav-home-btn" onclick="goHome()">
+            <span class="arrow">‹</span>
+            <span>Home</span>
+          </div>
+          <div style="font-size:18px;font-weight:800;color:#000;">Galeri Dorm</div>
+          <div style="color:var(--bl);font-weight:600;cursor:pointer;font-size:15px;" onclick="goHome()">Selesai</div>
+        </div>
+        <div class="photos-grid" id="photos-container"></div>
+      </div>
+
+      <!-- ==================== 8. INSTAGRAM APP ==================== -->
+      <div class="app-window" id="app-insta">
+        <div class="ig-header">
+          <div class="nav-home-btn" onclick="goHome()" style="color:#000;">
+            <span class="arrow">‹</span>
+            <span>Home</span>
+          </div>
+          <span>Instagram</span>
+          <div style="display:flex;gap:14px;font-size:20px;cursor:pointer;">
+            <span>❤️</span>
+            <span onclick="goHome()">✕</span>
+          </div>
+        </div>
+        <div class="ig-feed" id="ig-feed-container"></div>
+      </div>
+
+      <!-- ==================== 9. SAFARI / CHECKPOINT APP ==================== -->
+      <div class="app-window" id="app-safari">
+        <div class="msg-header">
+          <div class="nav-home-btn" onclick="goHome()">
+            <span class="arrow">‹</span>
+            <span>Home</span>
+          </div>
+          <div style="font-size:18px;font-weight:800;color:#000;">Checkpoint AU</div>
+          <div style="color:var(--bl);font-weight:600;cursor:pointer;font-size:15px;" onclick="goHome()">Selesai</div>
+        </div>
+        <div class="checkpoint-list" id="checkpoint-container"></div>
+      </div>
+
+      <!-- ==================== LIGHTBOX MODAL ==================== -->
+      <div id="img-modal">
+        <div class="modal-close" onclick="closeImgModal()">‹ Selesai</div>
+        <div class="modal-body" id="modal-content"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    /**
+     * SEVENTEEN PHONE SIMULATOR - COMEDY AU ENGINE
+     * Interactive story flow, Web Audio synthesizer, chat simulator
+     */
+
+    // 1. Audio Synthesizer (Zero external audio file dependency)
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function sfx(type) {
+      try {
+        const ctx = getAudioContext();
+        const t = ctx.currentTime;
+
+        if (type === 'keytap') {
+          // Soft iOS keyboard click
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, t);
+          osc.frequency.exponentialRampToValueAtTime(140, t + 0.04);
+          gain.gain.setValueAtTime(0.12, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.04);
+        }
+        else if (type === 'sent') {
+          // iOS sent swoosh (ascending chime)
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, t);
+          osc.frequency.exponentialRampToValueAtTime(880, t + 0.12);
+          gain.gain.setValueAtTime(0.18, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.14);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.14);
+        }
+        else if (type === 'recv') {
+          // iOS message bubble pop
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(780, t);
+          gain.gain.setValueAtTime(0.2, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.1);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(t);
+          osc.stop(t + 0.1);
+        }
+        else if (type === 'notif') {
+          // iOS Tri-tone chime (G5, B5, D6)
+          const notes = [783.99, 987.77, 1174.66];
+          notes.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, t + idx * 0.1);
+            gain.gain.setValueAtTime(0.18, t + idx * 0.1);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + idx * 0.1 + 0.18);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(t + idx * 0.1);
+            osc.stop(t + idx * 0.1 + 0.2);
+          });
+        }
+        else if (type === 'ring') {
+          // Ringtone marimba burst
+          const chord = [523.25, 659.25, 783.99, 1046.50];
+          chord.forEach((freq, idx) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, t + idx * 0.08);
+            gain.gain.setValueAtTime(0.22, t + idx * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + idx * 0.08 + 0.25);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(t + idx * 0.08);
+            osc.stop(t + idx * 0.08 + 0.28);
+          });
+        }
+      } catch (e) {
+        console.warn("Audio synth error:", e);
+      }
+    }
+
+    // 2. Seventeen Members Data
+    const MEMBERS = {
+      scoups: { name: "Bapak S.Coups", color: "#E63946", emoji: "🍒", role: "General Leader / Pemegang Black Card" },
+      jeonghan: { name: "Jeonghan", color: "#F4A261", emoji: "👼", role: "Vocal / Master Manipulator" },
+      joshua: { name: "Joshua", color: "#9B5DE5", emoji: "🦌", role: "Vocal / Gentleman tapi Chaos" },
+      jun: { name: "Jun", color: "#F77F00", emoji: "🐱", role: "Performance / Kucing Asrama" },
+      hoshi: { name: "Hoshi 🐯", color: "#FFB703", emoji: "🐯", role: "Performance / Si Paling Harimau" },
+      wonwoo: { name: "Wonwoo", color: "#457B9D", emoji: "🦊", role: "Hip-Hop / Gamer Bapak-Bapak" },
+      woozi: { name: "Woozi", color: "#E76F51", emoji: "🍚", role: "Vocal Leader / Bawa Gitar Akustik" },
+      dk: { name: "Dokyeom (DK)", color: "#2A9D8F", emoji: "☀️", role: "Vocal / Korban Puding Coklat" },
+      mingyu: { name: "Mingyu", color: "#C18C5D", emoji: "🐶", role: "Hip-Hop / Chef Asrama Serba Bisa" },
+      the8: { name: "The8", color: "#52B788", emoji: "🐸", role: "Performance / Pencari Ketenangan" },
+      seungkwan: { name: "Seungkwan", color: "#FB8500", emoji: "🍊", role: "Vocal / Wartawan Gosip Asrama" },
+      vernon: { name: "Vernon", color: "#023E8A", emoji: "🎧", role: "Hip-Hop / Si Paling Santuy" },
+      dino: { name: "Dino", color: "#38B000", emoji: "🦖", role: "Maknae / Menolak Cuci Piring" }
+    };
+
+    // 3. Short Comedy AU Story Beats
+    // Natural, funny, Going Seventeen dormitory banter
+    const STORY = [
+      // Scene 1: Group Chat explodes over Dokyeom's pudding
+      { room: "group", who: "dk", t: "WOY NGAKU GAK KALIAN SEMUA!! SIAPA YANG MAKAN PUDING COKLAT GUE DI KULKAS TADI SIANG?!" },
+      { room: "group", who: "dk", t: "Padahal udah gue tulisin spidol permanen: 'PUDING DOKYEOM, YANG MAKAN MANDUL 7 TURUNAN'!!" },
+      { room: "group", who: "mingyu", t: "Bukan gue ya Seok!! Gue seharian di dapur motong bawang sama bikin sup iga 15 liter buat kalian!" },
+      { room: "group", who: "dino", t: "Demi tuhan hyung, gue baru melek 5 menit lalu 😭 Jangan fitnah anak bontot mulu!" },
+      { room: "group", who: "jeonghan", t: "Hehehe... Jangan suudzon dulu Seokmin-ah. Tadi ada bule LA mondar-mandir depan kulkas sambil senyum mencurigakan." },
+      { room: "group", who: "joshua", t: "It was exceptionally creamy and sweet. God bless your generous heart, Seokmin-ah. 😇🙏" },
+      { room: "group", who: "dk", t: "JOSHUA HYUNGGGG KEJAAMMM!! GANTIIN GAK LO POKOKNYA GANTIIN 10 KOTAKK 😭😭" },
+      { room: "group", who: "joshua", t: "Charge it to Seungcheol's credit card. Cheers." },
+
+      // Scene 2: S.Coups enters with a bigger disaster
+      { room: "group", who: "scoups", t: "STOPPP!! DIEM DULU SEMUANYA!!" },
+      { room: "group", who: "scoups", t: "MASALAH PUDING TUNDA DULU! INI ADA YANG JAUH LEBIH GAWAT!!" },
+      { room: "group", who: "scoups", t: "BLACK CARD GUE DI MANA WOY?! KARTU KREDIT ASRAMA HILANG!!" },
+      { room: "group", who: "scoups", t: "Barusan dapet SMS banking notifikasi: Transaksi Rp 4.500.000 di Toko Satwa Liar & Daging Mart!!" },
+      { room: "group", who: "scoups", t: "SIAPA YANG BAWA KARTU GUE SEKARANG JUGA NGAKU?!" },
+
+      // Scene 3: Hoshi secretly DMs the protagonist (me)
+      { room: "hoshi", who: "hoshi", t: "P!! Ssssttt!! Kamu di kamar lantai 2 kan?!" },
+      { room: "hoshi", who: "hoshi", img: "tiger_plush", caption: "Nih liat temen baru kita!! Jangan bilang bapak S.Coups ya! 🤫" },
+      { room: "hoshi", f: "me", seq: ["bang hoshi... ", -3, "lu beli boneka macan 2 meter pake kartu bapak ya?!"] },
+      { room: "hoshi", who: "hoshi", t: "BUKAN BONEKA! INI HARIMAU ASLI! DIA BUTUH MAKAN DAGING WAGYU DUA KILO BIAR GAGAH!!" },
+      { room: "hoshi", f: "me", seq: ["bapak udah otw pulang bawa sapu lidi tolong 😭😭"] },
+      { room: "hoshi", who: "hoshi", t: "HORANGHAE!! 🐯 Harimau sejati tidak takut sapu lidi!!" },
+
+      // Scene 4: Incoming phone call from S.Coups to protagonist!
+      { type: "call", who: "scoups", line: "HALO?! Kamu di asrama kan?! Tolong periksa kamar Hoshi sekarang juga sebelum bapak pulang bawa sapu lidi!!" },
+
+      // Scene 5: Group chat chaos finale
+      { room: "group", who: "woozi", t: "Gue udah megang gitar akustik di depan pintu studio. Siapapun yang teriak jam 10:10 bakal gue smash senar enam." },
+      { room: "group", who: "the8", t: "Ketenangan adalah kunci. Tapi kelakuan kalian membuat chakra dan aura saya tidak stabil." },
+      { room: "group", who: "jun", t: "Tadi gue liat Hoshi lagi nyuapin daging sapi ke boneka macannya di balkon wkwkwkwk 😭" },
+      { room: "group", who: "wonwoo", t: "Sambil nunggu bapak nyampe, ada tebakan nih. Ban apa yang rasanya coklat manis? Bandeng presto dikasih puding Dokyeom." },
+      { room: "group", who: "dk", t: "GAK LUCU HYUNGGG!! GUE MASIH NANGIS PUDING GUE HILANG!!" },
+      { room: "group", who: "seungkwan", t: "BREAKING NEWS ASRAMA: Bapak Seungcheol sudah sampai lobi lantai 1. Suara langkah kakinya menggetarkan gedung. Dimohon warga asrama menyelamatkan diri masing-masing." },
+      { room: "group", who: "vernon", t: "lol rip hoshi." },
+      { room: "group", who: "dino", t: "GUE MAU REBAHAN DI KAMAR GAK IKUT-IKUTAN DADAH!" },
+      { room: "group", f: "me", seq: ["KABUR WOY BAPAK UDAH DI DEPAN PINTU!! ", -4, "SELAMATKAN DIRI KALIAN!!"] }
+    ];
+
+    // 4. Notes Data
+    const NOTES_DATA = [
+      {
+        title: "Daftar Dosa Penghuni Asrama Minggu Ini",
+        author: "Woozi 🍚",
+        date: "Kemarin, 03:30",
+        text: `• Hoshi: Masuk studio tanpa ngetuk bawa boneka macan (status: gitar diangkat).\n• Dokyeom: Latihan falsetto jam 2 pagi di lorong dekat kamarku.\n• Mingyu: Ninggalin mangkok mie di meja billiard.\n• Joshua: Nyiram air dingin ke kaki pas lagi tidur siang.\n\nKesimpulan: Butuh studio baru di pulau terpencil tanpa wifi.`
+      },
+      {
+        title: "Trik Licik Menang Going Seventeen",
+        author: "Jeonghan 👼",
+        date: "24 Okt, 23:45",
+        text: `1. Simpen kartu cadangan di kaos kaki kiri.\n2. Kalau S.Coups mulai curiga, langsung pasang muka sedih terus bilang 'Seungcheol-ah, kamu gak percaya sama aku?'. (100% manjur).\n3. Janjiin Mingyu bakso gratis biar dia mau jadi tumbal.\n4. Joshua jangan dipercaya, dia lebih licik dari gue.`
+      },
+      {
+        title: "Daftar Belanja Asrama (Tagih ke S.Coups)",
+        author: "Mingyu 🐶",
+        date: "Hari ini, 09:15",
+        text: `• Daging sapi 10 kg (Hoshi makan kayak singa kelaparan)\n• Telur ayam 5 papan (buat ramen 13 porsi)\n• Kopi arabika 2 toples (buat Woozi biar gak pingsan di studio)\n• Sabun cuci piring 5 liter (Dino tolong cuci piringmu sendiri!)\n\nTOTAL: 2.850.000 KRW -> Gesek Black Card Seungcheol.`
+      },
+      {
+        title: "Kumpulan Tebakan Bapak-Bapak Vol. 17",
+        author: "Wonwoo 🦊",
+        date: "23 Okt, 20:00",
+        text: `Q: Kenapa matahari tenggelam?\nA: Karena gak bisa renang.\n\nQ: Ban apa yang kalau dipake bisa bikin kenyang?\nA: Bandeng presto.\n\n(Tadi Dokyeom ketawa 10 menit denger ini, berarti leluconku sukses besar).`
+      }
+    ];
+
+    // 5. Photos Gallery Data
+    const PHOTOS_DATA = [
+      { id: "p1", icon: "🍜", label: "Ramen 13 Porsi", caption: "Mingyu masak ramen tengah malam di dapur asrama. Ludes dalam 3 menit!" },
+      { id: "p2", icon: "🐯", label: "Macan Jam 10:10", caption: "Hoshi memaksa seluruh dorm bergaya Horanghae sebelum makan." },
+      { id: "p3", icon: "🍮", label: "Puding Dokyeom", caption: "Sisa bungkus puding coklat Dokyeom yang ditemukan di tempat sampah Joshua." },
+      { id: "p4", icon: "💳", label: "Black Card Bapak", caption: "Kartu kredit keramat S.Coups yang menjadi rebutan 12 anak asrama." },
+      { id: "p5", icon: "🎸", label: "Gitar Akustik Woozi", caption: "Alat pengadil asrama ketika ada yang berisik di dekat studio musik." },
+      { id: "p6", icon: "🏠", label: "Ruang Tengah Dorm", caption: "Pemandangan ruang tengah yang porak poranda setelah main mafia game." }
+    ];
+
+    // 6. Instagram Feed Data
+    const IG_DATA = [
+      {
+        user: "sound_of_coups",
+        name: "S.Coups",
+        avatar: "🍒",
+        color: "#E63946",
+        emoji: "💳",
+        mediaText: "Mencari kartu kredit yang hilang... barangsiapa yang melihat Hoshi segera laporkan ke pihak berwajib.",
+        likes: "1.284.920",
+        caption: "sound_of_coups: Sabar bapak ada batasnya ya anak-anak."
+      },
+      {
+        user: "ho5hi_kwon",
+        name: "Hoshi",
+        avatar: "🐯",
+        color: "#FFB703",
+        emoji: "🐯",
+        mediaText: "HORANGHAE!! 🐯🔥 Memperkenalkan anggota baru dorm Seventeen, namanya Tiger-ie!",
+        likes: "1.492.110",
+        caption: "ho5hi_kwon: Dia makan daging wagyu, bukan puding coklat."
+      },
+      {
+        user: "dk_is_dokyeom",
+        name: "DK",
+        avatar: "☀️",
+        color: "#2A9D8F",
+        emoji: "🍮",
+        mediaText: "HARI BERDUKA ASRAMA: Selamat jalan puding coklat kesayanganku...",
+        likes: "982.340",
+        caption: "dk_is_dokyeom: Joshua hyung tolong buka pintunya jangan pura-pura tidur."
+      }
+    ];
+
+    // App State Controller
+    let currentPass = "1010";
+    let inputPin = "";
+    let currentStep = 0;
+    let activeThread = "group"; // 'group' or member key
+    let chatMessages = {
+      group: [],
+      hoshi: []
+    };
+    let isTyping = false;
+    let pendingBanner = null;
+
+    // Initialization
+    document.addEventListener("DOMContentLoaded", () => {
+      initClock();
+      initPasscodePad();
+      renderThreadsList();
+      renderNotes();
+      renderPhotos();
+      renderInstagram();
+      renderCheckpoints();
+      loadStoryStep(0);
+    });
+
+    // Clock updater
+    function initClock() {
+      const updateTime = () => {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, "0");
+        const m = String(now.getMinutes()).padStart(2, "0");
+        document.getElementById("clk").textContent = `${h}:${m}`;
+        document.getElementById("lt").textContent = `${h}:${m}`;
+      };
+      updateTime();
+      setInterval(updateTime, 1000);
+    }
+
+    // Passcode Logic
+    function initPasscodePad() {
+      const pad = document.getElementById("pad");
+      const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', ''];
+      const labels = ['', 'ABC', 'DEF', 'GHI', 'JKL', 'MNO', 'PQRS', 'TUV', 'WXYZ', '', '+', ''];
+
+      keys.forEach((k, i) => {
+        const b = document.createElement("b");
+        if (k) {
+          b.innerHTML = `${k}<small>${labels[i]}</small>`;
+          b.onclick = () => pressPinKey(k);
+        } else {
+          b.className = "e";
+        }
+        pad.appendChild(b);
+      });
+    }
+
+    function showPass() {
+      sfx('keytap');
+      document.getElementById("pass").classList.add("show");
+      document.getElementById("lock").classList.add("up");
+      inputPin = "";
+      updatePinDots();
+    }
+
+    function cancelPass() {
+      sfx('keytap');
+      document.getElementById("pass").classList.remove("show");
+      document.getElementById("lock").classList.remove("up");
+      inputPin = "";
+      updatePinDots();
+    }
+
+    function dismissIntro() {
+      sfx('keytap');
+      document.getElementById("intro").classList.add("go");
+    }
+
+    function pressPinKey(num) {
+      sfx('keytap');
+      if (inputPin.length >= 4) return;
+      inputPin += num;
+      updatePinDots();
+
+      if (inputPin.length === 4) {
+        setTimeout(() => {
+          // Accepts 1010 (Hoshi) or 1717 (Seventeen) or 0000
+          if (inputPin === "1010" || inputPin === "1717" || inputPin === "0000") {
+            unlockPhone();
+          } else {
+            const dots = document.getElementById("pdots");
+            dots.classList.add("shake");
+            sfx('recv');
+            setTimeout(() => {
+              dots.classList.remove("shake");
+              inputPin = "";
+              updatePinDots();
+            }, 450);
+          }
+        }, 150);
+      }
+    }
+
+    function updatePinDots() {
+      const dots = document.querySelectorAll("#pdots i");
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle("f", idx < inputPin.length);
+      });
+    }
+
+    function unlockPhone() {
+      sfx('sent');
+      document.getElementById("pass").classList.remove("show");
+      document.getElementById("lock").classList.add("gone");
+      document.getElementById("phone").setAttribute("data-ui", "light");
+      triggerStoryProgress();
+    }
+
+    function goHome() {
+      sfx('keytap');
+      document.querySelectorAll(".app-window").forEach(w => w.classList.remove("open"));
+      document.getElementById("phone").classList.remove("in-app");
+      document.getElementById("phone").setAttribute("data-ui", "light");
+      toggleKeyboard(false);
+    }
+
+    // Open App
+    function openApp(appId) {
+      sfx('keytap');
+      const appEl = document.getElementById("app-" + appId);
+      if (appEl) {
+        appEl.classList.add("open");
+        document.getElementById("phone").classList.add("in-app");
+        if (appId === "messages") {
+          document.getElementById("phone").setAttribute("data-ui", "light");
+        }
+      }
+    }
+
+    // 7. Messages App Logic
+    function renderThreadsList() {
+      const container = document.getElementById("threads-container");
+      container.innerHTML = `
+    <!-- Group Chat -->
+    <div class="thread-item" onclick="openChatRoom('group')">
+      <div class="thread-av" style="background:linear-gradient(135deg,var(--rq) 0%,var(--sr) 100%);">💎</div>
+      <div class="thread-info">
+        <div class="thread-top">
+          <span class="thread-name">ASRAMA SEVENTEEN (13)</span>
+          <span class="thread-time" id="thread-time-group">10:10</span>
+        </div>
+        <div class="thread-preview" id="thread-preview-group">S.Coups: BLACK CARD GUE DI MANA WOY?!</div>
+      </div>
+    </div>
+
+    <!-- Hoshi DM -->
+    <div class="thread-item" onclick="openChatRoom('hoshi')">
+      <div class="thread-av" style="background:#FFB703;">🐯</div>
+      <div class="thread-info">
+        <div class="thread-top">
+          <span class="thread-name">Hoshi 🐯</span>
+          <span class="thread-time" id="thread-time-hoshi">10:09</span>
+        </div>
+        <div class="thread-preview" id="thread-preview-hoshi">Jangan bilang bapak Seungcheol ya!!</div>
+      </div>
+    </div>
+
+    <!-- Dokyeom DM -->
+    <div class="thread-item" onclick="openChatRoom('dk')">
+      <div class="thread-av" style="background:#2A9D8F;">☀️</div>
+      <div class="thread-info">
+        <div class="thread-top">
+          <span class="thread-name">Dokyeom (DK)</span>
+          <span class="thread-time">09:55</span>
+        </div>
+        <div class="thread-preview">P! Lo liat puding coklat gue di kulkas ga?</div>
+      </div>
+    </div>
+
+    <!-- S.Coups DM -->
+    <div class="thread-item" onclick="openChatRoom('scoups')">
+      <div class="thread-av" style="background:#E63946;">🍒</div>
+      <div class="thread-info">
+        <div class="thread-top">
+          <span class="thread-name">Bapak S.Coups</span>
+          <span class="thread-time">09:40</span>
+        </div>
+        <div class="thread-preview">Nanti sore tolong temenin bapak beli kopi ya.</div>
+      </div>
+    </div>
+  `;
+    }
+
+    function openChatRoom(threadId) {
+      sfx('keytap');
+      activeThread = threadId;
+      document.getElementById("msg-threads-view").style.display = "none";
+      document.getElementById("msg-chat-view").style.display = "flex";
+
+      const headAv = document.getElementById("chat-head-av");
+      const headName = document.getElementById("chat-head-name");
+
+      if (threadId === "group") {
+        headAv.style.background = "linear-gradient(135deg,var(--rq) 0%,var(--sr) 100%)";
+        headAv.textContent = "💎";
+        headName.textContent = "ASRAMA SEVENTEEN (13) ›";
+      } else if (MEMBERS[threadId]) {
+        headAv.style.background = MEMBERS[threadId].color;
+        headAv.textContent = MEMBERS[threadId].emoji;
+        headName.textContent = `${MEMBERS[threadId].name} ›`;
+      }
+
+      renderChatBubbles();
+    }
+
+    function backToThreads() {
+      sfx('keytap');
+      document.getElementById("msg-chat-view").style.display = "none";
+      document.getElementById("msg-threads-view").style.display = "flex";
+      toggleKeyboard(false);
+    }
+
+    function renderChatBubbles() {
+      const container = document.getElementById("chat-scroll");
+      container.innerHTML = `<div class="chat-ts">Hari ini 10:10</div>`;
+
+      const msgs = chatMessages[activeThread] || [];
+      msgs.forEach(m => {
+        const isMe = m.f === "me";
+        const wrap = document.createElement("div");
+        wrap.className = `b-wrap ${isMe ? 'me' : 'them'}`;
+
+        if (!isMe && activeThread === "group" && m.who && MEMBERS[m.who]) {
+          const sender = document.createElement("div");
+          sender.className = "sender-tag";
+          sender.style.color = MEMBERS[m.who].color;
+          sender.textContent = MEMBERS[m.who].name;
+          wrap.appendChild(sender);
+        }
+
+        const bubble = document.createElement("div");
+        if (m.img) {
+          bubble.className = "bubble img-bubble";
+          bubble.innerHTML = `
+        <div class="photo-card" onclick="viewPhotoModal('🐯 Boneka Macan 2 Meter Hoshi', 'Boneka macan raksasa yang dibeli Hoshi seharga Rp 4.500.000 memakai Black Card S.Coups!')">
+          <div style="font-size:56px;margin:10px 0;">🐯</div>
+          <div style="font-size:14px;font-weight:700;">Boneka Macan Hoshi.jpg</div>
+          <div class="bubble-caption">${m.caption || ''}</div>
+        </div>
+      `;
+        } else {
+          bubble.className = `bubble ${isMe ? 'me' : 'them'}`;
+          bubble.textContent = m.t;
+        }
+        wrap.appendChild(bubble);
+
+        if (isMe) {
+          const del = document.createElement("div");
+          del.className = "bubble-delivered";
+          del.textContent = "Terkirim";
+          wrap.appendChild(del);
+        }
+
+        container.appendChild(wrap);
+      });
+
+      // Scroll to bottom
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // 8. Story Progression Engine
+    function loadStoryStep(stepIdx) {
+      for (let i = 0; i < stepIdx; i++) {
+        applyStoryBeat(STORY[i], false);
+      }
+      currentStep = stepIdx;
+    }
+
+    function applyStoryBeat(beat, withSound = true) {
+      if (beat.type === "call") {
+        // Call trigger handled separately
+        return;
+      }
+      const room = beat.room || "group";
+      if (!chatMessages[room]) chatMessages[room] = [];
+      chatMessages[room].push(beat);
+
+      if (withSound) {
+        if (beat.f === "me") sfx('sent');
+        else {
+          sfx('recv');
+          // Show top banner if not currently viewing this room
+          const isViewing = document.getElementById("app-messages").classList.contains("open") &&
+            document.getElementById("msg-chat-view").style.display === "flex" &&
+            activeThread === room;
+          if (!isViewing) {
+            showTopBanner(beat);
+          }
+        }
+      }
+
+      // Update thread preview
+      const prevEl = document.getElementById(`thread-preview-${room}`);
+      if (prevEl) {
+        const sender = beat.f === "me" ? "Gue: " : (beat.who && MEMBERS[beat.who] ? `${MEMBERS[beat.who].name}: ` : "");
+        prevEl.textContent = sender + (beat.t || "[Foto]");
+      }
+
+      if (activeThread === room) {
+        renderChatBubbles();
+      }
+    }
+
+    // Automated story runner
+    async function triggerStoryProgress() {
+      if (currentStep >= STORY.length) return;
+
+      const beat = STORY[currentStep];
+
+      if (beat.type === "call") {
+        // Ring the phone!
+        setTimeout(() => {
+          triggerIncomingCall(beat.who, beat.line);
+        }, 1500);
+        return;
+      }
+
+      if (beat.f === "me") {
+        // Simulated auto-typing for protagonist when keyboard opens
+        await simulateProtagonistTyping(beat);
+      } else {
+        // Show typing dots in chat room if currently open
+        showTypingDots(beat.room || "group");
+        const delay = Math.min(1200 + (beat.t ? beat.t.length * 40 : 1500), 3500);
+        setTimeout(() => {
+          hideTypingDots();
+          applyStoryBeat(beat, true);
+          currentStep++;
+          // Auto trigger next beat
+          setTimeout(triggerStoryProgress, 2000);
+        }, delay);
+      }
+    }
+
+    function showTypingDots(room) {
+      if (activeThread !== room) return;
+      const container = document.getElementById("chat-scroll");
+      let dots = document.getElementById("typing-indicator-box");
+      if (!dots) {
+        dots = document.createElement("div");
+        dots.id = "typing-indicator-box";
+        dots.className = "typing-dots";
+        dots.innerHTML = `<span></span><span></span><span></span>`;
+        container.appendChild(dots);
+        container.scrollTop = container.scrollHeight;
+      }
+    }
+
+    function hideTypingDots() {
+      const dots = document.getElementById("typing-indicator-box");
+      if (dots) dots.remove();
+    }
+
+    async function simulateProtagonistTyping(beat) {
+      const inputEl = document.getElementById("chat-input");
+      const fullText = beat.seq ? beat.seq[0] : beat.t;
+
+      // Wait until user opens the room and clicks input, or auto-fill
+      let typed = "";
+      for (let ch of fullText) {
+        typed += ch;
+        inputEl.innerHTML = `<span style="color:#000;">${typed}</span>`;
+        sfx('keytap');
+        await new Promise(r => setTimeout(r, 65));
+      }
+
+      // Auto send
+      setTimeout(() => {
+        sendCurrentMessage();
+      }, 900);
+    }
+
+    function sendCurrentMessage() {
+      const inputEl = document.getElementById("chat-input");
+      const text = inputEl.textContent.trim();
+      if (!text || text === "iMessage") return;
+
+      sfx('sent');
+      inputEl.innerHTML = `<span id="input-placeholder" style="color:#8e8e93;">iMessage</span>`;
+
+      const beat = STORY[currentStep];
+      if (beat && beat.f === "me") {
+        applyStoryBeat({ room: activeThread, f: "me", t: text }, true);
+        currentStep++;
+        setTimeout(triggerStoryProgress, 1800);
+      } else {
+        // Free typing message
+        applyStoryBeat({ room: activeThread, f: "me", t: text }, true);
+      }
+    }
+
+    // 9. Phone Call Screen Logic
+    let callInterval = null;
+    let currentCallDuration = 0;
+
+    function triggerIncomingCall(whoKey, dialogueText) {
+      const member = MEMBERS[whoKey] || MEMBERS.scoups;
+      const screen = document.getElementById("call-screen");
+      const av = document.getElementById("call-av");
+      const name = document.getElementById("call-name");
+      const status = document.getElementById("call-status");
+      const box = document.getElementById("call-box");
+      const line = document.getElementById("call-line-text");
+      const acceptBtn = document.getElementById("call-accept-btn");
+
+      av.style.background = member.color;
+      av.textContent = member.emoji;
+      name.textContent = member.name;
+      status.textContent = "Panggilan Masuk...";
+      box.style.display = "none";
+      line.textContent = dialogueText;
+      acceptBtn.style.display = "flex";
+
+      screen.classList.add("active");
+      sfx('ring');
+
+      // Loop ringtone while ringing
+      const ringLoop = setInterval(() => {
+        if (screen.classList.contains("active") && status.textContent === "Panggilan Masuk...") {
+          sfx('ring');
+        } else {
+          clearInterval(ringLoop);
+        }
+      }, 2200);
+    }
+
+    function acceptCall() {
+      sfx('keytap');
+      const status = document.getElementById("call-status");
+      const box = document.getElementById("call-box");
+      const acceptBtn = document.getElementById("call-accept-btn");
+
+      status.textContent = "00:00";
+      acceptBtn.style.display = "none";
+      box.style.display = "block";
+
+      currentCallDuration = 0;
+      callInterval = setInterval(() => {
+        currentCallDuration++;
+        const m = String(Math.floor(currentCallDuration / 60)).padStart(2, "0");
+        const s = String(currentCallDuration % 60).padStart(2, "0");
+        status.textContent = `${m}:${s}`;
+      }, 1000);
+
+      // Auto end call after reading dialogue
+      setTimeout(() => {
+        declineCall();
+      }, 6500);
+    }
+
+    function declineCall() {
+      sfx('sent');
+      clearInterval(callInterval);
+      document.getElementById("call-screen").classList.remove("active");
+
+      // Advance story after call
+      if (STORY[currentStep] && STORY[currentStep].type === "call") {
+        currentStep++;
+        setTimeout(triggerStoryProgress, 1200);
+      }
+    }
+
+    function triggerDirectCall() {
+      sfx('ring');
+      triggerIncomingCall(activeThread === "group" ? "scoups" : activeThread, "Halo?! Kamu di asrama kan?! Cepat buka grup asrama sekarang juga!");
+    }
+
+    // 10. Top Notification Banner
+    function showTopBanner(beat) {
+      const banner = document.getElementById("banner-notif");
+      const av = document.getElementById("banner-av");
+      const name = document.getElementById("banner-name");
+      const txt = document.getElementById("banner-text");
+
+      const member = (beat.who && MEMBERS[beat.who]) ? MEMBERS[beat.who] : MEMBERS.scoups;
+      av.style.background = member.color;
+      av.textContent = member.emoji;
+      name.textContent = member.name;
+      txt.textContent = beat.t || "[Kirim Foto]";
+
+      banner.classList.add("show");
+      pendingBanner = beat.room || "group";
+      sfx('notif');
+
+      setTimeout(() => {
+        banner.classList.remove("show");
+      }, 4000);
+    }
+
+    function openFromBanner() {
+      document.getElementById("banner-notif").classList.remove("show");
+      openApp("messages");
+      if (pendingBanner) {
+        openChatRoom(pendingBanner);
+      }
+    }
+
+    // 11. Notes, Photos, Instagram & Checkpoint Renderers
+    function renderNotes() {
+      const container = document.getElementById("notes-container");
+      container.innerHTML = NOTES_DATA.map(n => `
+    <div class="note-item" onclick="viewPhotoModal('${n.title}', '${n.text.replace(/\n/g, '<br>')}')">
+      <div class="note-title">${n.title}</div>
+      <div style="font-size:11px;font-weight:600;color:#e11d48;margin-bottom:4px;">${n.author} · ${n.date}</div>
+      <div class="note-snippet">${n.text.split('\n')[0]}</div>
+    </div>
+  `).join('');
+    }
+
+    function renderPhotos() {
+      const container = document.getElementById("photos-container");
+      container.innerHTML = PHOTOS_DATA.map(p => `
+    <div class="photo-thumb" onclick="viewPhotoModal('${p.label}', '${p.caption}')">
+      <span>${p.label}</span>
+      ${p.icon}
+    </div>
+  `).join('');
+    }
+
+    function renderInstagram() {
+      const container = document.getElementById("ig-feed-container");
+      container.innerHTML = IG_DATA.map(post => `
+    <div class="ig-post">
+      <div class="ig-post-head">
+        <div class="ig-av" style="background:${post.color};">${post.avatar}</div>
+        <span>${post.user}</span>
+      </div>
+      <div class="ig-post-media">
+        <div>${post.emoji}</div>
+        <p>${post.mediaText}</p>
+      </div>
+      <div class="ig-post-bar">
+        <span>❤️</span>
+        <span>💬</span>
+        <span>↗️</span>
+      </div>
+      <div class="ig-post-likes">${post.likes} suka</div>
+      <div class="ig-post-caption">${post.caption}</div>
+    </div>
+  `).join('');
+    }
+
+    function renderCheckpoints() {
+      const container = document.getElementById("checkpoint-container");
+      const cps = [
+        { title: "Bagian 1: Kasus Puding Coklat DK", step: 0 },
+        { title: "Bagian 2: S.Coups Kehilangan Black Card", step: 7 },
+        { title: "Bagian 3: Hoshi Mengaku Beli Macan", step: 12 },
+        { title: "Bagian 4: Telepon Darurat Bapak S.Coups", step: 17 },
+        { title: "Bagian 5: Asrama Chaos Menyelamatkan Diri", step: 19 }
+      ];
+
+      container.innerHTML = cps.map((cp, idx) => `
+    <div class="cp-card" onclick="jumpToStoryCheckpoint(${cp.step})">
+      <div class="cp-num">${idx + 1}</div>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:#0f172a;">${cp.title}</div>
+        <div style="font-size:12px;color:#64748b;">Klik untuk memutar ulang cerita dari bab ini</div>
+      </div>
+    </div>
+  `).join('');
+    }
+
+    function jumpToStoryCheckpoint(stepIdx) {
+      sfx('keytap');
+      chatMessages = { group: [], hoshi: [] };
+      loadStoryStep(stepIdx);
+      goHome();
+      openApp("messages");
+      openChatRoom(STORY[stepIdx].room || "group");
+      triggerStoryProgress();
+    }
+
+    // 12. Modal Lightbox
+    function viewPhotoModal(title, text) {
+      sfx('keytap');
+      const modal = document.getElementById("img-modal");
+      const content = document.getElementById("modal-content");
+      content.innerHTML = `
+    <h2 style="font-size:22px;margin-bottom:12px;color:#fff;">${title}</h2>
+    <div style="background:rgba(255,255,255,0.1);padding:20px;border-radius:18px;max-width:320px;line-height:1.5;font-size:14px;color:#e2e8f0;text-align:left;">
+      ${text}
+    </div>
+  `;
+      modal.classList.add("open");
+    }
+
+    function closeImgModal() {
+      sfx('keytap');
+      document.getElementById("img-modal").classList.remove("open");
+    }
+
+    function toggleKeyboard(show) {
+      const kb = document.getElementById("virtual-keyboard");
+      if (show) {
+        sfx('keytap');
+        kb.classList.add("up");
+      } else {
+        kb.classList.remove("up");
+      }
+    }
+
+    function deleteChar() {
+      sfx('keytap');
+      const inputEl = document.getElementById("chat-input");
+      const current = inputEl.textContent;
+      if (current && current !== "iMessage") {
+        const updated = current.slice(0, -1);
+        inputEl.innerHTML = updated ? `<span style="color:#000;">${updated}</span>` : `<span id="input-placeholder" style="color:#8e8e93;">iMessage</span>`;
+      }
+    }
+
+    function showMemberProfile() {
+      sfx('keytap');
+      const member = MEMBERS[activeThread] || MEMBERS.scoups;
+      viewPhotoModal(member.name, `Role: ${member.role}<br><br>"Kalau ada masalah di asrama, jangan panik. Cari bapak S.Coups atau sembunyi di kamar Joshua."`);
+    }
+  </script>
+</body>
+
+</html>
